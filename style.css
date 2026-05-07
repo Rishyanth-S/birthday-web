@@ -86,17 +86,11 @@ body {
     text-shadow: 0 0 20px rgba(255, 45, 117, 0.3);
 }
 
-/* Ken Burns Effect */
+/* Ken Burns Effect Disabled */
 .ken-burns {
-    animation: kenburns 20s ease infinite alternate;
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-@keyframes kenburns {
-    0% { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.2) translate(-2%, -2%); }
 }
 
 /* Slideshow */
@@ -190,15 +184,9 @@ body {
     100% { transform: translateY(-100vh) scale(1.5) rotate(45deg); opacity: 0; }
 }
 
-/* Petals */
+/* Petals Disabled */
 .petal {
-    position: absolute;
-    background: var(--pink);
-    border-radius: 150% 0 150% 0;
-    opacity: 0.3;
-    pointer-events: none;
-    z-index: 5;
-    box-shadow: 0 0 10px rgba(255, 45, 117, 0.2);
+    display: none !important;
 }
 
 /* Wish Cards */
