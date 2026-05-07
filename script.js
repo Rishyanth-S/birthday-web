@@ -41,12 +41,9 @@ function unlock() {
             lockScreen.style.display = 'none';
             document.body.style.overflow = 'auto';
             
-            // EMERGENCY REVEAL: Force all elements to be visible if they are stuck
-            document.querySelectorAll('.reveal-text, .opacity-0').forEach(el => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            });
-
+            // Re-trigger ScrollTrigger refresh after unlock to ensure positions are correct
+            ScrollTrigger.refresh();
+            
             startCinematicIntro();
         }
     });
@@ -313,6 +310,7 @@ document.querySelectorAll('.reveal-text').forEach((text, i) => {
         scrollTrigger: {
             trigger: text,
             start: 'top 90%',
+            once: true // Ensures it stays visible once revealed
         },
         opacity: 0,
         y: 20,
