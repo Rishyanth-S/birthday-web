@@ -1,0 +1,290 @@
+:root {
+    --pink: #ff2d75;
+    --purple: #4a148c;
+    --black: #050208;
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glow-pink: 0 0 20px rgba(255, 45, 117, 0.4);
+}
+
+@keyframes glow {
+    0%, 100% { 
+        text-shadow: 0 0 10px rgba(255, 45, 117, 0.4), 
+                     0 0 20px rgba(255, 45, 117, 0.2); 
+    }
+    50% { 
+        text-shadow: 0 0 20px rgba(255, 45, 117, 0.7), 
+                     0 0 40px rgba(255, 45, 117, 0.4), 
+                     0 0 60px rgba(255, 45, 117, 0.2); 
+    }
+}
+
+.text-glow {
+    animation: glow 4s ease-in-out infinite;
+}
+
+.glass-pulse {
+    animation: borderPulse 3s infinite;
+}
+
+@keyframes borderPulse {
+    0%, 100% { border-color: rgba(255, 255, 255, 0.1); box-shadow: 0 0 0 rgba(255, 45, 117, 0); }
+    50% { border-color: rgba(255, 45, 117, 0.4); box-shadow: 0 0 20px rgba(255, 45, 117, 0.1); }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important; /* Custom cursor is mandatory for cinematic feel */
+}
+
+body {
+    background-color: var(--black);
+    font-family: 'Inter', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--purple);
+    border-radius: 10px;
+}
+
+/* Glassmorphism Utility */
+.glass-morphism {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Typography */
+.font-luxury {
+    font-family: 'Playfair Display', serif;
+}
+
+.font-script {
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Lock Screen */
+#lock-screen {
+    background: radial-gradient(circle at center, #1a0b2e 0%, #000000 100%);
+    z-index: 9999;
+}
+
+.countdown-item span {
+    text-shadow: 0 0 20px rgba(255, 45, 117, 0.3);
+}
+
+/* Ken Burns Effect */
+.ken-burns {
+    animation: kenburns 20s ease infinite alternate;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes kenburns {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.2) translate(-2%, -2%); }
+}
+
+/* Slideshow */
+#slideshow .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    transform: scale(1.1);
+}
+
+#slideshow .slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 10;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 15px;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 1px;
+    border-left: 3px solid var(--pink);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1) 0.5s;
+}
+
+.slide.active .slide-caption {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Scroll Dots */
+.scroll-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.scroll-dot.active {
+    background: var(--pink);
+    box-shadow: 0 0 10px var(--pink);
+    height: 24px;
+    border-radius: 10px;
+}
+
+/* Reveal Animations */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.reveal-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.section-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Floating Hearts Animation */
+.floating-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    color: var(--pink);
+    filter: drop-shadow(0 0 5px var(--pink));
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.5) rotate(45deg); opacity: 0; }
+}
+
+/* Petals */
+.petal {
+    position: absolute;
+    background: var(--pink);
+    border-radius: 150% 0 150% 0;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(255, 45, 117, 0.2);
+}
+
+/* Wish Cards */
+.wish-card {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s ease;
+}
+
+.wish-card:hover {
+    transform: translateY(-15px) rotate(2deg);
+    box-shadow: 0 20px 40px rgba(255, 45, 117, 0.1);
+}
+
+/* Letter Animation */
+.letter-paper {
+    transform: perspective(1000px) rotateX(5deg);
+    transition: transform 1s ease;
+}
+
+#letter:hover .letter-paper {
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+/* Proposal Video */
+#video-container {
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+}
+
+/* Cinematic Letter Reveal */
+.char {
+    display: inline-block;
+    perspective: 1000px;
+    transform-origin: bottom;
+}
+
+/* Light Leak Effect */
+.light-leak {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 80% 20%, rgba(255, 45, 117, 0.1), transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(74, 20, 140, 0.1), transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Custom Cursor Glow */
+#cursor-glow {
+    mix-blend-mode: screen;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    #hero-title {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+    #hero-subtitle {
+        font-size: 1.1rem;
+        padding: 0 20px;
+    }
+    .countdown-item span {
+        font-size: 1.8rem;
+    }
+    .countdown-container {
+        gap: 10px;
+    }
+    .glass-morphism {
+        padding: 1.5rem !important;
+    }
+    .letter-paper {
+        padding: 2.5rem 1.5rem !important;
+        margin: 0 10px;
+    }
+    .wish-card {
+        margin-top: 0 !important;
+    }
+    h3 {
+        font-size: 1.8rem !important;
+        margin-bottom: 2rem !important;
+    }
+    .anime-card {
+        height: auto !important;
+        aspect-ratio: 4/5 !important;
+    }
+    #slideshow {
+        height: 65vh !important;
+    }
+}
