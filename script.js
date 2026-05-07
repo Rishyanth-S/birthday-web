@@ -22,7 +22,7 @@ const countdownItems = {
 
 // --- 1. COUNTDOWN LOGIC ---
 function updateCountdown() {
-    const target = new Date('2026-05-08T00:00:00').getTime();
+    const target = new Date('2026-05-07T21:15:00').getTime();
     const now = new Date().getTime();
     const diff = target - now;
 
