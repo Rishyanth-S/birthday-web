@@ -71,28 +71,11 @@ function startCinematicIntro() {
           .to('#hero-heart', { opacity: 1, scale: 1, duration: 1, ease: 'back.out' }, '-=0.5');
     }
 
-    // Start music with "Forced Autoplay" attempt
+    // Start music only after interaction
     const music = document.getElementById('bg-music');
     if (music) {
-        music.volume = 1.0;
-        
-        const attemptAutoplay = setInterval(() => {
-            music.play().then(() => {
-                console.log("Autoplay success!");
-                clearInterval(attemptAutoplay);
-            }).catch(err => {
-                // Keep trying until the user interacts or the browser allows it
-                console.log("Waiting for browser to allow sound...");
-            });
-        }, 100);
-
-        // Also try on any possible interaction
-        ['click', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
-            document.addEventListener(evt, () => {
-                music.play();
-                clearInterval(attemptAutoplay);
-            }, { once: true });
-        });
+        music.load(); // Start loading
+        music.play().catch(err => console.log("Music play blocked by browser"));
     }
 
     createPetals();
@@ -186,7 +169,7 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-for (let i = 0; i < 100; i++) particles.push(new Particle());
+for (let i = 0; i < 50; i++) particles.push(new Particle()); // Reduced for performance
 initCanvas();
 animateParticles();
 window.addEventListener('resize', initCanvas);
