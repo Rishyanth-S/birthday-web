@@ -50,6 +50,13 @@ function updateCountdown() {
 // Update countdown initially
 updateCountdown();
 
+// Update every second
+const timerInterval = setInterval(() => {
+    if (updateCountdown()) {
+        clearInterval(timerInterval);
+    }
+}, 1000);
+
 // --- 2. UNLOCK ANIMATION ---
 function unlock() {
     gsap.to(lockScreen, {
