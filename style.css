@@ -61,9 +61,10 @@ body {
 
 /* Glassmorphism Utility */
 .glass-morphism {
-    background: rgba(0, 0, 0, 0.7); /* Solid but elegant dark background */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    will-change: transform;
+    background: rgba(10, 10, 10, 0.95); /* High opacity solid background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
 /* Typography */
