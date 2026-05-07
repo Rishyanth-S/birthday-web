@@ -61,11 +61,9 @@ body {
 
 /* Glassmorphism Utility */
 .glass-morphism {
-    background: rgba(255, 255, 255, 0.08); /* Slightly more opaque for better contrast without blur */
-    backdrop-filter: blur(8px); /* Reduced from 20px for performance */
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid var(--glass-border);
-    will-change: transform; /* GPU Acceleration */
+    background: rgba(0, 0, 0, 0.7); /* Solid but elegant dark background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    will-change: transform;
 }
 
 /* Typography */
