@@ -160,18 +160,10 @@ class Particle {
     }
 }
 
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animateParticles);
-}
-
-for (let i = 0; i < 50; i++) particles.push(new Particle()); // Reduced for performance
+// Particle system disabled for extreme performance
+// for (let i = 0; i < 50; i++) particles.push(new Particle()); 
 initCanvas();
-animateParticles();
+// animateParticles(); 
 window.addEventListener('resize', initCanvas);
 
 // --- 5. SLIDESHOW LOGIC ---
