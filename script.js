@@ -22,10 +22,29 @@ const countdownItems = {
 
 // --- 1. COUNTDOWN LOGIC ---
 function updateCountdown() {
-    // Timer is turned off - immediate access granted
-    unlockBtn.classList.remove('hidden');
-    gsap.to(unlockBtn, { opacity: 1, y: 0, display: 'block', duration: 1 });
-    return true;
+    const target = new Date('2026-05-08T00:00:00').getTime();
+    const now = new Date().getTime();
+    const diff = target - now;
+
+    if (diff <= 0) {
+        document.getElementById('countdown-container').style.display = 'none';
+        unlockBtn.classList.remove('hidden');
+        gsap.to(unlockBtn, { opacity: 1, y: 0, display: 'block', duration: 1 });
+        return true;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('days').innerText = d.toString().padStart(2, '0');
+    document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+    document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+    document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+
+    unlockBtn.classList.add('hidden');
+    return false;
 }
 
 // Update countdown initially
