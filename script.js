@@ -86,9 +86,16 @@ setInterval(() => {
 document.getElementById('prev-slide')?.addEventListener('click', () => showSlide(currentSlide - 1));
 document.getElementById('next-slide')?.addEventListener('click', () => showSlide(currentSlide + 1));
 
-// --- 5. SIMPLE REVEAL (NO GSAP) ---
-// Since we want zero lag, we make everything visible immediately or use simple CSS transitions
-document.querySelectorAll('.opacity-0, .translate-y-10, .section-reveal').forEach(el => {
-    el.style.opacity = '1';
-    el.style.transform = 'none';
-});
+// --- 6. FOCUS MODE: AUDIO/VIDEO OPTIMIZATION ---
+const proposalVideo = document.getElementById('proposal-video');
+if (proposalVideo) {
+    proposalVideo.addEventListener('play', () => {
+        if (music) music.pause();
+    });
+    proposalVideo.addEventListener('ended', () => {
+        if (music) music.play().catch(() => {});
+    });
+    proposalVideo.addEventListener('pause', () => {
+        if (music) music.play().catch(() => {});
+    });
+}

@@ -211,8 +211,7 @@ body {
 
 /* Proposal Video */
 #video-container {
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
+    background: rgba(0, 0, 0, 0.95); /* Solid black for focus */
 }
 
 /* Cinematic Letter Reveal */
