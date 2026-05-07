@@ -156,8 +156,7 @@ body {
 
 /* Reveal Animations */
 .reveal-text {
-    opacity: 0;
-    transform: translateY(20px);
+    /* Always visible by default as a safety net */
 }
 
 .reveal-text.visible {

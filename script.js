@@ -223,18 +223,6 @@ resetSlideTimer();
 document.getElementById('prev-slide')?.addEventListener('click', prevSlide);
 document.getElementById('next-slide')?.addEventListener('click', nextSlide);
 
-// FORCED VISIBILITY FALLBACK (Solves "unable to view" issues)
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        document.querySelectorAll('.opacity-0, .reveal-text').forEach(el => {
-            if (!el.classList.contains('char')) {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }
-        });
-    }, 5000); // 5 seconds safety net
-});
-
 // Parallax for memories
 gsap.to('#slideshow img', {
     scrollTrigger: {
@@ -292,18 +280,25 @@ document.querySelectorAll('.wish-card').forEach((card, i) => {
     });
 });
 
+// Optimized Letter Reveal
 document.querySelectorAll('.reveal-text').forEach((text, i) => {
-    gsap.from(text, {
+    // Hide initially via JS only
+    gsap.set(text, { opacity: 0, y: 30 });
+    
+    gsap.to(text, {
         scrollTrigger: {
             trigger: text,
-            start: 'top 90%',
-            once: true // Ensures it stays visible once revealed
+            start: 'top 95%', // Trigger earlier
+            once: true
         },
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        delay: i * 0.1,
-        ease: 'power2.out'
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: i * 0.15,
+        ease: 'power3.out',
+        onComplete: () => {
+            console.log(`Letter paragraph ${i} revealed`);
+        }
     });
 });
 
