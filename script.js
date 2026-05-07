@@ -66,22 +66,9 @@ function startCinematicIntro() {
     // Cinematic Hero Text Reveal
     const heroTitle = document.getElementById('hero-title');
     if (heroTitle) {
-        const text = heroTitle.innerText;
-        heroTitle.innerHTML = text.split('').map(char => `<span class="char opacity-0 inline-block">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-
-        tl.to('.char', {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            stagger: 0.05,
-            duration: 1,
-            ease: 'back.out(1.7)',
-            onStart: () => {
-                gsap.set('.char', { y: 50, rotateX: -90 });
-            }
-        })
-        .to('#hero-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5')
-        .to('#hero-heart', { opacity: 1, scale: 1, duration: 1, ease: 'back.out' }, '-=0.3');
+        tl.to(heroTitle, { opacity: 1, y: 0, duration: 1.5, ease: 'power4.out' })
+          .to('#hero-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.8')
+          .to('#hero-heart', { opacity: 1, scale: 1, duration: 1, ease: 'back.out' }, '-=0.5');
     }
 
     // Start music with "Forced Autoplay" attempt
