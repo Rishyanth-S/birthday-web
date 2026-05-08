@@ -249,6 +249,7 @@ const startProposalBtn = document.getElementById('start-proposal');
 const videoContainer = document.getElementById('video-container');
 const closeVideoBtn = document.getElementById('close-video');
 const proposalVideo = document.getElementById('proposal-video');
+const videoOverlay = document.getElementById('video-overlay-play');
 
 if (startProposalBtn && videoContainer) {
     startProposalBtn.addEventListener('click', () => {
@@ -258,11 +259,21 @@ if (startProposalBtn && videoContainer) {
     });
 }
 
+if (videoOverlay && proposalVideo) {
+    videoOverlay.addEventListener('click', () => {
+        videoOverlay.classList.add('hidden');
+        proposalVideo.play().catch(e => {
+            console.error("Video play failed:", e);
+        });
+    });
+}
+
 if (closeVideoBtn) {
     closeVideoBtn.addEventListener('click', () => {
         if (proposalVideo) proposalVideo.pause();
         videoContainer.classList.add('hidden');
         videoContainer.classList.remove('flex');
+        if (videoOverlay) videoOverlay.classList.remove('hidden'); // Reset overlay
         if (music) music.play().catch(()=>{});
         
         // Show ending
@@ -275,16 +286,29 @@ if (closeVideoBtn) {
 
 if (proposalVideo) {
     proposalVideo.addEventListener('play', () => {
+        if (videoOverlay) videoOverlay.classList.add('hidden');
         if (music) music.pause();
     });
     proposalVideo.addEventListener('ended', () => {
         if (music) music.play().catch(() => {});
     });
     proposalVideo.addEventListener('pause', () => {
-        // Only resume if we are not closing the video completely
         if (!videoContainer.classList.contains('hidden')) {
             if (music) music.play().catch(() => {});
         }
     });
 }
+
+// --- 8. SCROLL REVEAL OBSERVER ---
+const revealElements = document.querySelectorAll('.opacity-0');
+const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.style.transition = 'all 1s cubic-bezier(0.2, 1, 0.3, 1)';
+        }
+    });
+}, { threshold: 0.1 });
+
+revealElements.forEach(el => scrollObserver.observe(el));
 
