@@ -244,8 +244,35 @@ function createHeartBurst(x, y) {
     }
 }
 
-// Focus Mode
+// --- 7. VIDEO REVEAL & FOCUS MODE ---
+const startProposalBtn = document.getElementById('start-proposal');
+const videoContainer = document.getElementById('video-container');
+const closeVideoBtn = document.getElementById('close-video');
 const proposalVideo = document.getElementById('proposal-video');
+
+if (startProposalBtn && videoContainer) {
+    startProposalBtn.addEventListener('click', () => {
+        videoContainer.classList.remove('hidden');
+        videoContainer.classList.add('flex');
+        if (music) music.pause();
+    });
+}
+
+if (closeVideoBtn) {
+    closeVideoBtn.addEventListener('click', () => {
+        if (proposalVideo) proposalVideo.pause();
+        videoContainer.classList.add('hidden');
+        videoContainer.classList.remove('flex');
+        if (music) music.play().catch(()=>{});
+        
+        // Show ending
+        const proposalSection = document.getElementById('proposal');
+        if (proposalSection) proposalSection.style.display = 'none';
+        const endingSection = document.getElementById('ending');
+        if (endingSection) endingSection.scrollIntoView({ behavior: 'smooth' });
+    });
+}
+
 if (proposalVideo) {
     proposalVideo.addEventListener('play', () => {
         if (music) music.pause();
@@ -254,6 +281,10 @@ if (proposalVideo) {
         if (music) music.play().catch(() => {});
     });
     proposalVideo.addEventListener('pause', () => {
-        if (music) music.play().catch(() => {});
+        // Only resume if we are not closing the video completely
+        if (!videoContainer.classList.contains('hidden')) {
+            if (music) music.play().catch(() => {});
+        }
     });
 }
+

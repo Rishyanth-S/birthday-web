@@ -289,7 +289,7 @@
             <div id="proposal-pre" class="text-center z-10 px-4">
                 <h3 class="text-2xl font-light mb-4 opacity-0 translate-y-10" id="pre-text-1">One last thing… ❤️</h3>
                 <h2 class="text-4xl md:text-6xl font-['Playfair_Display'] italic mb-12 opacity-0 translate-y-10"
-                    id="pre-text-2">I have something special to ask you.</h2>
+                    id="pre-text-2">I have something special for you.</h2>
 
                 <button id="start-proposal"
                     class="btn-glow px-10 py-4 rounded-full transition-all duration-500 group opacity-0 translate-y-10">
@@ -303,15 +303,9 @@
             <div id="video-container" class="fixed inset-0 z-[200] hidden bg-black items-center justify-center">
                 <div
                     class="w-full max-w-4xl aspect-video glass-morphism rounded-3xl overflow-hidden border border-white/20 relative shadow-[0_0_100px_rgba(255,45,117,0.2)]">
-                    <video id="proposal-video" class="w-full h-full object-cover" preload="metadata">
+                    <video id="proposal-video" class="w-full h-full object-cover" playsinline controls preload="auto">
                         <source src="proposal_video.mp4" type="video/mp4">
                     </video>
-
-                    <div id="video-overlay"
-                        class="absolute inset-0 flex items-center justify-center bg-black/40 group cursor-pointer">
-                        <i data-lucide="play-circle"
-                            class="w-20 h-20 text-white opacity-80 group-hover:scale-110 transition-transform"></i>
-                    </div>
                 </div>
 
                 <button id="close-video"
