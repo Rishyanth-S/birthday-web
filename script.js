@@ -10,6 +10,72 @@ const unlockBtn = document.getElementById('unlock-btn');
 const countdownContainer = document.getElementById('countdown-container');
 const music = document.getElementById('bg-music');
 
+// --- LUXURY PARTICLES AND CURSOR ---
+function initLuxuryEffects() {
+    const container = document.getElementById('particle-container') || document.body;
+    
+    // Heart particles
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.className = 'particle-heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        const duration = Math.random() * 5 + 5;
+        heart.style.animationDuration = duration + 's';
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), duration * 1000);
+    }, 1000);
+
+    // Rose petals
+    setInterval(() => {
+        const petal = document.createElement('div');
+        petal.className = 'particle-petal';
+        petal.style.left = Math.random() * 100 + 'vw';
+        const size = Math.random() * 10 + 8;
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        const duration = Math.random() * 6 + 6;
+        petal.style.animationDuration = duration + 's';
+        container.appendChild(petal);
+        setTimeout(() => petal.remove(), duration * 1000);
+    }, 800);
+
+    // Custom Cursor tracking
+    const cursor = document.createElement('div');
+    cursor.id = 'custom-cursor';
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Occasional trail sparkle
+        if (Math.random() > 0.9) {
+            const trail = document.createElement('div');
+            trail.className = 'particle-heart';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            trail.style.fontSize = '8px';
+            trail.style.animationDuration = '1.5s';
+            trail.innerHTML = '✨';
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 1500);
+        }
+    });
+
+    document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
+    document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+
+    // Add class to interactive elements for cursor hover
+    const interactives = document.querySelectorAll('button, a, .slide-caption, .floating-card');
+    interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(1.5)');
+        el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+    });
+}
+initLuxuryEffects();
+
 // --- 2. COUNTDOWN LOGIC ---
 function updateCountdown() {
     const now = new Date().getTime();

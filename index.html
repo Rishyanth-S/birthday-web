@@ -19,8 +19,11 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
-<body class="bg-black text-white overflow-auto selection:bg-pink-500/30">
-    <!-- Scroll Progress -->
+<body class="bg-black text-white overflow-hidden selection:bg-pink-500/30">
+    <!-- Luxury Particle Container -->
+    <div id="particle-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- 1. LOCK SCREEN -->
     <div class="fixed top-0 left-0 w-full h-1 z-[200]">
         <div id="scroll-progress" class="h-full bg-gradient-to-r from-pink-500 to-purple-600 w-0"></div>
     </div>
@@ -67,13 +70,10 @@
             </div>
 
             <button id="unlock-btn"
-                class="relative z-[100] px-10 py-4 bg-white/5 hover:bg-white/10 border border-white/20 rounded-full transition-all duration-500 group overflow-hidden shadow-2xl">
-                <span class="relative z-10 text-xl font-medium tracking-wide flex items-center gap-3">
-                    Enter the Surprise <i data-lucide="volume-2" class="w-5 h-5 text-pink-400"></i>
+                class="btn-glow relative z-[100] px-10 py-4 rounded-full transition-all duration-500 group overflow-hidden">
+                <span class="relative z-10 text-xl font-medium tracking-wide flex items-center gap-3 text-white">
+                    Enter the Surprise <i data-lucide="volume-2" class="w-5 h-5 text-white"></i>
                 </span>
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-pink-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                </div>
             </button>
 
             <p id="audio-hint" class="text-pink-400/60 text-xs mt-4 opacity-0 transition-opacity">Note: Click above to
@@ -292,8 +292,8 @@
                     id="pre-text-2">I have something special to ask you.</h2>
 
                 <button id="start-proposal"
-                    class="px-10 py-4 glass-morphism rounded-full border border-pink-500/50 hover:bg-pink-500/10 transition-all duration-500 group opacity-0 translate-y-10">
-                    <span class="flex items-center gap-3 text-xl">
+                    class="btn-glow px-10 py-4 rounded-full transition-all duration-500 group opacity-0 translate-y-10">
+                    <span class="flex items-center gap-3 text-xl text-white">
                         Reveal Surprise <i data-lucide="play" class="w-5 h-5 fill-current"></i>
                     </span>
                 </button>
@@ -371,7 +371,7 @@
                     Happy Birthday Brijisha ❤️</h2>
 
                 <button id="replay-btn"
-                    class="mt-8 px-8 py-3 glass-morphism rounded-full border border-white/10 hover:bg-white/5 transition-all opacity-0 translate-y-10 reveal-final">
+                    class="btn-glow mt-8 px-8 py-3 rounded-full transition-all opacity-0 translate-y-10 reveal-final text-white">
                     Replay Memories ❤️
                 </button>
             </div>
