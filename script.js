@@ -86,7 +86,99 @@ setInterval(() => {
 document.getElementById('prev-slide')?.addEventListener('click', () => showSlide(currentSlide - 1));
 document.getElementById('next-slide')?.addEventListener('click', () => showSlide(currentSlide + 1));
 
-// --- 6. FOCUS MODE: AUDIO/VIDEO OPTIMIZATION ---
+// --- 6. TYPEWRITER EFFECT & INTERACTION ---
+const typewriterElements = document.querySelectorAll('.typewriter-text');
+
+const observerOptions = {
+    threshold: 0.5
+};
+
+const typewriterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const text = el.getAttribute('data-text');
+            if (!el.classList.contains('typed')) {
+                typeText(el, text);
+                el.classList.add('typed');
+            }
+        }
+    });
+}, observerOptions);
+
+typewriterElements.forEach(el => typewriterObserver.observe(el));
+
+function typeText(element, text) {
+    let i = 0;
+    element.innerHTML = '';
+    const speed = 50; 
+
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// Heart Burst & Sparkles on Hover
+document.querySelectorAll('.floating-card').forEach(card => {
+    card.addEventListener('mouseenter', (e) => {
+        createSparkles(card);
+        createHeartBurst(e.clientX, e.clientY);
+    });
+});
+
+function createSparkles(parent) {
+    for (let i = 0; i < 5; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        parent.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 2000);
+    }
+}
+
+function createHeartBurst(x, y) {
+    for (let i = 0; i < 6; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.className = 'fixed pointer-events-none text-xl z-[1000]';
+        heart.style.left = x + 'px';
+        heart.style.top = y + 'px';
+        document.body.appendChild(heart);
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 2 + Math.random() * 3;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+        
+        let opacity = 1;
+        let posX = x;
+        let posY = y;
+
+        function animate() {
+            posX += vx;
+            posY += vy;
+            opacity -= 0.02;
+            heart.style.left = posX + 'px';
+            heart.style.top = posY + 'px';
+            heart.style.opacity = opacity;
+
+            if (opacity > 0) {
+                requestAnimationFrame(animate);
+            } else {
+                heart.remove();
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+}
+
+// Focus Mode
 const proposalVideo = document.getElementById('proposal-video');
 if (proposalVideo) {
     proposalVideo.addEventListener('play', () => {
