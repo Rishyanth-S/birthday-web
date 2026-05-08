@@ -148,26 +148,24 @@ body {
     border-radius: 10px;
 }
 
-/* Reveal Animations */
 .reveal-text {
-    /* Always visible by default as a safety net */
-    will-change: transform, opacity;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .reveal-text.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .section-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .section-reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 /* Floating Hearts Animation */
@@ -263,6 +261,13 @@ body {
     .wish-card {
         margin-top: 0 !important;
     }
+/* Force visibility on all elements */
+.opacity-0 {
+    opacity: 1 !important;
+}
+.translate-y-10 {
+    transform: none !important;
+}
     h3 {
         font-size: 1.8rem !important;
         margin-bottom: 2rem !important;
